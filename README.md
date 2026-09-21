@@ -4,34 +4,34 @@ This repository contains the Windows end-user and server administrator
 executables for Syncdown. It intentionally does not contain the private
 development source.
 
-## Client
+## Client setup and run
 
-Configure a local folder with `.syncdown\config.json` and run:
-
-```powershell
-.\bin\syncdown.exe "C:\Syncdown\SharedProject"
-```
-
-The configuration format is:
-
-```json
-{
-  "repository": "shared-project",
-  "server": "http://192.168.1.20:8000"
-}
-```
-
-## Server administrator
-
-Start the server with:
+Keep these two files together, run setup once, and then use the generated run
+script:
 
 ```powershell
-.\bin\syncdown-server.exe --host 0.0.0.0 --port 8000 --data-dir .\syncdown-server-data
+.\syncdown-client-setup.exe
+.\syncdown-client-run.cmd
 ```
 
-Create repositories through the server's `POST /repositories` API. The server
-stores SQLite metadata and content-addressed objects under the selected data
-directory. Do not expose this prototype to an untrusted network without
-adding authentication, authorization, and TLS.
+Setup asks for the local folder, server URL, repository, and password. It
+creates `.syncdown\config.json`, copies `syncdown-client.exe` into the local
+folder, runs the first sync, and deletes `syncdown-client-setup.exe`.
+
+## Server setup and run
+
+Keep `syncdown-server-setup.exe` and `syncdown-server.exe` together and run:
+
+```powershell
+.\syncdown-server-setup.exe
+.\syncdown-server-run.cmd
+```
+
+Setup configures the bind address, port, repository, and server password. It
+creates the server data and configuration files, starts the server, and
+deletes `syncdown-server-setup.exe`. Later starts use the generated run script.
+The server stores SQLite metadata and content-addressed objects under the data
+directory. The setup output includes the server identification key for
+administrative repository creation.
 
 See [END_USER_README.md](./END_USER_README.md) for the complete setup guide.
