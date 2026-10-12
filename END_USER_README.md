@@ -36,6 +36,9 @@ You can supply any setup value with `--host`, `--port`, `--repository`, and
 Add `--password "your-password"` to skip the password prompts. Command-line
 passwords may be visible to local process inspection, so use the interactive
 prompt for normal manual setup.
+For automation that should configure the server without starting it
+immediately, add `--no-start` and run the generated
+`syncdown-server-run.bat` when ready.
 
 The setup output includes a server identification key. Keep it private along
 with the server password; both are required to create repositories remotely.
@@ -62,7 +65,9 @@ uses its prompt. For example:
 ```
 
 Add `--password "your-password"` to skip the password prompt. Command-line
-passwords may be visible to local process inspection. Setup writes
+passwords may be visible to local process inspection. To configure the client
+without immediately syncing, add `--no-start` and run the generated
+`syncdown-client-run.bat` when ready. Setup writes
 `.syncdown\config.json` and installs
 `syncdown-client.exe` under `.syncdown` in the selected folder. It creates
 `syncdown-client-run.bat` at the top level, runs the first sync, and removes

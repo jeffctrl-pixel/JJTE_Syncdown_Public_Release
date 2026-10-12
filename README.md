@@ -31,7 +31,9 @@ passwords may be visible to local process inspection, so use the interactive
 prompt for normal manual setup. Setup creates `.syncdown\config.json` and
 installs `syncdown-client.exe` under `.syncdown` in the selected folder. The
 generated `syncdown-client-run.bat` launcher remains at the top level of that
-folder; use it for later syncs.
+folder; use it for later syncs. For automation that should configure the
+client without immediately syncing, add `--no-start` and run the generated
+launcher when ready.
 
 ## Server setup and run
 
@@ -50,7 +52,8 @@ may be visible to local process inspection. Setup installs the runtime
 executable, configuration, and server data under `.syncdown` in the setup
 directory. The generated
 `syncdown-server-run.bat` launcher remains at the top level; use it to start
-the server later. The setup output includes the server identification key
-needed for administrative repository creation.
+the server later. For automation that should configure the server without
+starting it immediately, add `--no-start`. The setup output includes the
+server identification key needed for administrative repository creation.
 
 See [END_USER_README.md](./END_USER_README.md) for the complete setup guide.
