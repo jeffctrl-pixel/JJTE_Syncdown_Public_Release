@@ -4,34 +4,38 @@ This repository contains the Windows end-user and server administrator
 executables for Syncdown. It intentionally does not contain the private
 development source.
 
+The four executables are in [`bin/`](./bin/). Keep each setup executable beside
+its corresponding run executable until setup is complete.
+
 ## Client setup and run
 
-Keep these two files together, run setup once, and then use the generated run
-script:
+Copy `syncdown-client-setup.exe` and `syncdown-client.exe` from `bin` into a
+temporary directory, then run the setup executable:
 
 ```powershell
 .\syncdown-client-setup.exe
-.\syncdown-client-run.cmd
 ```
 
 Setup asks for the local folder, server URL, repository, and password. It
-creates `.syncdown\config.json`, copies `syncdown-client.exe` into the local
-folder, runs the first sync, and deletes `syncdown-client-setup.exe`.
+creates `.syncdown\config.json` and installs `syncdown-client.exe` under
+`.syncdown` in the selected folder. The generated `syncdown-client-run.bat`
+launcher remains at the top level of that folder; use it for later syncs.
 
 ## Server setup and run
 
-Keep `syncdown-server-setup.exe` and `syncdown-server.exe` together and run:
+Copy `syncdown-server-setup.exe` and `syncdown-server.exe` from `bin` into the
+directory that will hold the server installation, then run the setup
+executable:
 
 ```powershell
 .\syncdown-server-setup.exe
-.\syncdown-server-run.cmd
 ```
 
 Setup configures the bind address, port, repository, and server password. It
-creates the server data and configuration files, starts the server, and
-deletes `syncdown-server-setup.exe`. Later starts use the generated run script.
-The server stores SQLite metadata and content-addressed objects under the data
-directory. The setup output includes the server identification key for
-administrative repository creation.
+installs the runtime executable, configuration, and server data under
+`.syncdown` in the setup directory. The generated
+`syncdown-server-run.bat` launcher remains at the top level; use it to start
+the server later. The setup output includes the server identification key
+needed for administrative repository creation.
 
 See [END_USER_README.md](./END_USER_README.md) for the complete setup guide.
