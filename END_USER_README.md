@@ -25,6 +25,18 @@ that directory, creates `syncdown-server-run.bat`, and starts the server.
 The setup executable and the original run executable beside it are removed
 after startup. Use `syncdown-server-run.bat` for later starts.
 
+You can supply any setup value with `--host`, `--port`, `--repository`, and
+`--password`; any option you omit still uses its prompt. For example:
+
+```powershell
+.\syncdown-server-setup.exe --host 0.0.0.0 --port 8000 `
+  --repository shared-project
+```
+
+Add `--password "your-password"` to skip the password prompts. Command-line
+passwords may be visible to local process inspection, so use the interactive
+prompt for normal manual setup.
+
 The setup output includes a server identification key. Keep it private along
 with the server password; both are required to create repositories remotely.
 Use `127.0.0.1` for local-only use and `0.0.0.0` when other devices need to
@@ -39,8 +51,19 @@ temporary directory and run:
 .\syncdown-client-setup.exe
 ```
 
-Answer the prompts for the local folder, repository, server URL, and
-password. Setup writes `.syncdown\config.json` and installs
+Answer the prompts for the local folder, repository, server IP address or
+hostname, port, and password. You can supply values with `--folder`,
+`--repository`, `--host`, `--port`, and `--password`; any omitted option still
+uses its prompt. For example:
+
+```powershell
+.\syncdown-client-setup.exe --folder "C:\Syncdown\SharedProject" `
+  --repository shared-project --host 192.168.1.20 --port 8000
+```
+
+Add `--password "your-password"` to skip the password prompt. Command-line
+passwords may be visible to local process inspection. Setup writes
+`.syncdown\config.json` and installs
 `syncdown-client.exe` under `.syncdown` in the selected folder. It creates
 `syncdown-client-run.bat` at the top level, runs the first sync, and removes
 the setup executable from the temporary directory. Use

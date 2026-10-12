@@ -16,10 +16,22 @@ temporary directory, then run the setup executable:
 .\syncdown-client-setup.exe
 ```
 
-Setup asks for the local folder, server URL, repository, and password. It
-creates `.syncdown\config.json` and installs `syncdown-client.exe` under
-`.syncdown` in the selected folder. The generated `syncdown-client-run.bat`
-launcher remains at the top level of that folder; use it for later syncs.
+Setup asks for the local folder, server IP address or hostname, port,
+repository, and password. You may supply any values with `--folder`,
+`--host`, `--port`, `--repository`, and `--password`; any omitted option
+continues to prompt interactively. For example:
+
+```powershell
+.\syncdown-client-setup.exe --folder "C:\Syncdown\SharedProject" `
+  --repository shared-project --host 192.168.1.20 --port 8000
+```
+
+Add `--password "your-password"` to skip the password prompt. Command-line
+passwords may be visible to local process inspection, so use the interactive
+prompt for normal manual setup. Setup creates `.syncdown\config.json` and
+installs `syncdown-client.exe` under `.syncdown` in the selected folder. The
+generated `syncdown-client-run.bat` launcher remains at the top level of that
+folder; use it for later syncs.
 
 ## Server setup and run
 
@@ -31,9 +43,12 @@ executable:
 .\syncdown-server-setup.exe
 ```
 
-Setup configures the bind address, port, repository, and server password. It
-installs the runtime executable, configuration, and server data under
-`.syncdown` in the setup directory. The generated
+Setup configures the bind address, port, repository, and server password.
+Supply `--host`, `--port`, `--repository`, and `--password` to set these
+without prompts; omitted values remain interactive. Command-line passwords
+may be visible to local process inspection. Setup installs the runtime
+executable, configuration, and server data under `.syncdown` in the setup
+directory. The generated
 `syncdown-server-run.bat` launcher remains at the top level; use it to start
 the server later. The setup output includes the server identification key
 needed for administrative repository creation.
