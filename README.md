@@ -50,7 +50,9 @@ Supply `--host`, `--port`, `--repository`, and `--password` to set these
 without prompts; omitted values remain interactive. Command-line passwords
 may be visible to local process inspection. Setup installs the runtime
 executable, configuration, and server data under `.syncdown` in the setup
-directory. The generated
+directory. The password is stored there as a salted hash in
+`.syncdown\metadata.sqlite3` so the server reads it from its configured data
+directory at launch. The generated
 `syncdown-server-run.bat` launcher remains at the top level; use it to start
 the server later. For automation that should configure the server without
 starting it immediately, add `--no-start`. The setup output includes the
