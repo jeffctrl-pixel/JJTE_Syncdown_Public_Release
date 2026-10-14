@@ -75,5 +75,13 @@ the setup executable from the temporary directory. Use
 `syncdown-client-run.bat` for later syncs.
 
 Each device must use its own local folder. Syncdown reports conflicts rather
-than silently overwriting either side. TLS is not managed by Syncdown; use
-HTTPS through a trusted reverse proxy or a private network.
+than silently overwriting either side. Removing a previously synced file
+deletes it from the shared repository and other devices on their next sync,
+unless another device has changed that file, in which case Syncdown reports a
+conflict.
+
+Syncdown identifies a rename when exactly one removed path and one newly
+added path have identical file contents (matching SHA-256 hashes). A rename
+with changed contents, or ambiguous duplicate contents, is reported as a
+deletion and an addition rather than guessed. TLS is not managed by Syncdown;
+use HTTPS through a trusted reverse proxy or a private network.
